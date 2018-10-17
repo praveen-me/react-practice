@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React Basics</title>
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+<body>
+  <div id="container"></div>
+
+  <!-- Load custom Script -->
+  
+  <script type="text/babel">
+    var name = prompt("Enter a name");
+    
+    var elm = <h1>{name ? `Hello ${name}` : "Hello Someone"}</h1>
+   
+  
+    ReactDOM.render(
+      elm,
+      document.getElementById('container')
+    );
+  </script>
+</body>
+</html>
