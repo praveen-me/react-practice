@@ -1,0 +1,33 @@
+.btn {
+  border-radius: 2px;
+  border: none;
+  background: rgb(14, 71, 71);
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.primary {
+  background: #26a69a;
+  &:hover {
+    background: #145750;
+  }
+}
+
+.small {
+  padding: 4px 8px;
+}
+
+.big {
+  padding: 12px 14px;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.disabled {
+  background-color: #ddd;
+  cursor: default;
+}
