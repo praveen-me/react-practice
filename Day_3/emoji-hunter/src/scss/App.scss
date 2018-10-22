@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Mali:300,400,400i,500,500i,600,700');
+
+body {
+  margin: 0;
+}
+
+.App {
+  font-family: 'Mali', cursive;
+}
+
+.inline {
+  display: inline-block;
+}
+
+// Haeder
+.emoji-header {
+  padding: 1rem 0;
+}
+
+.logo {
+  font-weight: 500;
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.random-header {
+  font-size: 2.5rem;
+  margin: 0 1rem;
+}
+
+.emoji-header {
+  text-align: center;
+}
+
+// EmojiContainer
+.search-container {
+  font-size: 0;
+}
+
+.search-bar {
+  display: block;
+  width: 100%;
+}
