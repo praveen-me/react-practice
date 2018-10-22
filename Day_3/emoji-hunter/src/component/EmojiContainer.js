@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class EmojiCard extends Component {
+class EmojiContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,24 +23,29 @@ class EmojiCard extends Component {
     if(query) {
       let matchString = new RegExp(query, 'i')
 
-      filteredEmojiArray = emojiesArray.filter(emoji => matchString.test(emoji.title))
+      filteredEmojiArray = emojiesArray.filter(emoji => matchString.test(emoji.keywords))
     } else {
       filteredEmojiArray = emojiesArray;
     }
 
     return (
-      <div>
-        <input type="text" onChange={(e) => this.updateQuery(e.target.value)}/>
+      <main className="EmojiContainer">
+        <div className="search-container">
+          <input type="text" className="search-bar" onChange={(e) => this.updateQuery(e.target.value)}/>
+        </div>
         <div className="cards-container">
           {
             filteredEmojiArray.map(emoji => (
-              <h1 key={emoji.title}>{emoji.title}</h1>
+              <div className="card">
+                <h1 key={emoji.title}>{emoji.title}</h1>
+                <div>{emoji.symbol}</div>
+              </div>
             ))
           }
         </div>
-      </div>
+      </main>
     );
   }
 }
 
-export default EmojiCard;
+export default EmojiContainer;
