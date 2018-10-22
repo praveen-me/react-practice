@@ -37,7 +37,7 @@ class EmojiContainer extends Component {
         <div className="cards-container">
           {
             filteredEmojiArray.map((emoji, index) => (
-              <EmojiCard emoji={emoji} id={index} key={emoji.title}/>
+              <EmojiCard emoji={emoji} key={emoji.title}/>
             ))
           }
         </div>
