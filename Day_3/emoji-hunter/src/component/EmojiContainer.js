@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import EmojiCard from './EmojiCard';
 
 class EmojiContainer extends Component {
   constructor(props) {
@@ -21,9 +22,9 @@ class EmojiContainer extends Component {
     let filteredEmojiArray;
 
     if(query) {
-      let matchString = new RegExp(query, 'i')
+      let matchString = new RegExp(query, 'i');
 
-      filteredEmojiArray = emojiesArray.filter(emoji => matchString.test(emoji.keywords))
+      filteredEmojiArray = emojiesArray.filter(emoji => matchString.test(emoji.title))
     } else {
       filteredEmojiArray = emojiesArray;
     }
@@ -35,11 +36,8 @@ class EmojiContainer extends Component {
         </div>
         <div className="cards-container">
           {
-            filteredEmojiArray.map(emoji => (
-              <div className="card">
-                <h1 key={emoji.title}>{emoji.title}</h1>
-                <div>{emoji.symbol}</div>
-              </div>
+            filteredEmojiArray.map((emoji, index) => (
+              <EmojiCard emoji={emoji} id={index} key={emoji.title}/>
             ))
           }
         </div>
