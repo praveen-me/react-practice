@@ -10,7 +10,7 @@ class EmojiCard extends Component {
   takeCopy = (e) => {
     e.preventDefault();
     const elm = e.target.firstChild;
-    navigator.clipboard.writeText(elm.innerHTML)
+    navigator.clipboard.writeText(elm.innerHTML);
   }
 
   render() {
