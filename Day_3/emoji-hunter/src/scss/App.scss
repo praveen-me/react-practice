@@ -4,6 +4,10 @@ body {
   margin: 0;
 }
 
+* {
+  box-sizing: border-box; 
+}
+
 .App {
   font-family: 'Mali', cursive;
 }
@@ -35,9 +39,14 @@ body {
 // EmojiContainer
 .search-container {
   font-size: 0;
+  padding: 0.5rem 1rem;
 }
 
 .search-bar {
   display: block;
   width: 100%;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  border: 2px solid #ddd;
+  padding: 0.5rem 1.5rem;
 }
