@@ -50,3 +50,21 @@ body {
   border: 2px solid #ddd;
   padding: 0.5rem 1.5rem;
 }
+
+// EmojiCard
+.EmojiCard {
+  margin: 0.2rem 1rem;
+  padding: 0.5rem 0.5rem;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    background: #cfcdcd;
+  }
+}
+
+.emoji-symbol, .emoji-title {
+  margin: 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
