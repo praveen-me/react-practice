@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import List from "./List";
+import Header from './Header';
+import ListAddForm from './ListAddForm';
 import "./../scss/App.scss";
 
 class App extends Component {
@@ -7,7 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       listItems: [],
-      itemValue: ""
+      leftItemArray : [],
+      completedItemsArray : []
     };
   }
 
@@ -19,8 +22,8 @@ class App extends Component {
       id: this.state.listItems.length,
       done: false
     };
-    this.setState(state => ({
-      listItems: [...this.state.listItems, obj]
+    this.setState(({
+      listItems: [...this.state.listItems, obj],
     }));
     e.target.firstChild.value = "";
   };
@@ -31,31 +34,34 @@ class App extends Component {
     });
   };
 
-  handleDone = (e, itemId) => {
+  handleDone = (e, id) => {
     let newArr = [...this.state.listItems];
-    newArr[itemId].done = e.target.checked;
+    newArr.forEach(item => {
+        if(item.id === id) {
+          item.done = !item.done;
+        }
+      }    
+    );
     this.setState({
       listItems: newArr
     });
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="App">
-        <header className="header wrapper">
-          <h1 className="title">todos</h1>
-        </header>
+        <Header />
         <main className="wrapper">
           <div className="list-wrapper">
-            <form className="add-list-container" onSubmit={this.handleSubmit}>
-              <input type="text" className="item-value" placeholder="What needs to be done?"/>
-            </form>
+            <ListAddForm onSubmit={this.handleSubmit}/>
             <List
               itemsArray={this.state.listItems}
               onDelete={this.handleDelete}
               isDone={this.handleDone}
             />
+            <div>
+              <span>{this.state.leftItemArray ? this.state.leftItemArray.length : 0}items left</span>
+            </div>
           </div>
         </main>
       </div>
