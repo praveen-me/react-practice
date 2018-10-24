@@ -14,11 +14,11 @@ class ListItem extends Component {
 
     return (
       <li className="list-item" id={id}>
-        <input type="checkbox" onClick={(e) => isDone(e,id)} checked={done}/>
+        <input type="checkbox" className={`toggle ${done}`} onClick={(e) => isDone(e,id)} checked={done}/>
         {
           doneItem
         }
-        <button className="delete-item" onClick={() => onDelete(id)}>X</button>
+        <button className="delete-item" onClick={() => onDelete(id)}>×</button>
       </li>
     );
   }
