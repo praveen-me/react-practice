@@ -61,6 +61,7 @@ body {
 
 .item-name.done {
   text-decoration: line-through;
+  color: #ddd;
 }
 
 .delete-item {
@@ -91,4 +92,27 @@ body {
   &::after {
     opacity: 1;
   }
+}
+
+.active {
+  color: red;
+}
+
+.items-left {
+  color: rgb(78, 77, 77);
+  word-spacing: 0.12rem;
+}
+
+.list-footer {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(3,1fr);
+}
+
+.btn {
+  border: none;
+  background: transparent;
+  color: rgb(78, 77, 77);
+  font-size: 0.9rem; 
+  cursor: pointer;
 }
