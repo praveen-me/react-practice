@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Cabin');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+
+
+.wrapper {
+  width: 60%;
+  margin:  1rem auto;
+}
+
+input[type="text"] {
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  padding-left: 0.5rem;
+  box-sizing: border-box;
+}
+
+.display-container {
+  display: grid;
+  grid-template-columns: 3fr 8fr;
+  border: 1px solid #ddd;
+}
+
+.font-name {
+  background: blue;
+  color: #fff;
+  align-self: stretch;
+  justify-self: stretch;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+.text {
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 10px;
+}
+
+.Karla {
+  font-family: 'Karla', sans-serif;
+}
+
+.Helevitica.Neue {
+  font-family: 'Helvetica', sans-serif;
+}
+
+.Bree.serif {
+  font-family: 'Bree Serif', serif;
+}
+
+.Lato {
+  font-family: 'Lato', sans-serif;
+}
+
+.Cabin {
+  font-family: 'Cabin', sans-serif;
+}
+
+.Pacifico {
+  font-family: 'Pacifico', cursive;
+}
+
+.Open.Sans.Condensed {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+
