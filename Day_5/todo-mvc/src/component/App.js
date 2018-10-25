@@ -9,7 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       listItems: [],
-      itemsAll : [], 
+      itemsAll : [],
+      id : 0
     };
   }
 
@@ -18,12 +19,13 @@ class App extends Component {
     const value = e.target.firstChild.value;
     const obj = {
       value: value,
-      id: this.state.listItems.length,
+      id: this.state.id,
       done: false
     };
     this.setState(({
       listItems: [...this.state.listItems, obj],
-      itemsAll : [...this.state.listItems, obj]
+      itemsAll : [...this.state.listItems, obj],
+      id : this.state.id + 1
     }));
     e.target.firstChild.value = "";
   };
