@@ -9,8 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       listItems: [],
-      leftItemArray : [],
-      completedItemsArray : []
+      itemsAll : [], 
     };
   }
 
@@ -24,13 +23,14 @@ class App extends Component {
     };
     this.setState(({
       listItems: [...this.state.listItems, obj],
+      itemsAll : [...this.state.listItems, obj]
     }));
     e.target.firstChild.value = "";
   };
 
   handleDelete = itemId => {
     this.setState({
-      listItems: this.state.listItems.filter(c => c.id !== itemId)
+      listItems: this.state.listItems.filter(c => c.id !== itemId),
     });
   };
 
@@ -47,7 +47,44 @@ class App extends Component {
     });
   };
 
+  showActive = (e) => {
+    console.log(e.target,"is clicked")
+    e.preventDefault();
+    const allItems = this.state.itemsAll.filter(item => !item.done);
+
+    this.setState({
+      listItems : allItems
+    })
+  }
+
+  showAll = (e) => {
+    e.preventDefault();
+    this.setState({
+      listItems : this.state.itemsAll
+    })
+  }
+
+  showCompleted = (e) => {
+    e.preventDefault();
+    const allItems = this.state.itemsAll.filter(item => item.done);
+
+    this.setState({
+      listItems : allItems
+    }) 
+  }
+
+  handleClearCompleted = (e) => {
+    e.preventDefault();
+    this.state.itemsAll = this.state.itemsAll.filter(item => !item.done)
+
+    this.setState({
+      listItems : this.state.itemsAll
+    })
+  }
+
   render() {
+    let leftItems = this.state.itemsAll.filter(item => !item.done);
+
     return (
       <div className="App">
         <Header />
@@ -59,8 +96,14 @@ class App extends Component {
               onDelete={this.handleDelete}
               isDone={this.handleDone}
             />
-            <div>
-              <span>{this.state.leftItemArray ? this.state.leftItemArray.length : 0}items left</span>
+            <div className="list-footer">
+              <span className="items-left">{leftItems.length}   items left</span>
+              <div className="lis-footer-btns">
+                <button className="btn active" onClick={this.showAll}>All</button>
+                <button className="btn" onClick={this.showActive}>Active</button>
+                <button className="btn" onClick={this.showCompleted}>Completed</button>
+              </div>
+              <button className="btn" onClick={this.handleClearCompleted}>Clear Completed</button>
             </div>
           </div>
         </main>
