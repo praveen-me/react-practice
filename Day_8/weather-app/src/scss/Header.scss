@@ -32,4 +32,7 @@ header {
   cursor: pointer;
   color: #fff;
   font-size: 1.2rem;
+  &:hover {
+    background-color: #554b85;
+  }
 }
