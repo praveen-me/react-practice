@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Asap:400,400i,500,500i,600,600i,700');
+@import './reset.scss';
+@import './base.scss';
+@import './Header.scss';
+
+.App {
+  font-family: 'Asap', sans-serif;
+}
+button, input {
+  font-family: 'Asap', sans-serif;
+}
