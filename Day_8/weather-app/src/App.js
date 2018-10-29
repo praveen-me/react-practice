@@ -22,30 +22,15 @@ class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
-    const {value} = this.state;
-    this.setState({
-      isLoading : true
-    })
-
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=5437540a4b1f9a06516d43ed1ef3d5ee`)
-      .then(res => res.json())
-      .then(data => {
-        if(data.cod === '404') {
-         return this.setState({
-            error : true,
-            isLoading : false
-          });
-        }
-        return this.setState({
-          weatherData : data,
-          isLoading : false
-        });
-      });
+    this.fetchData();
   }
 
   handleClick = e => {
     e.preventDefault();
+    this.fetchData();
+  }
+
+  fetchData = () => {
     const {value} = this.state;
     this.setState({
       isLoading : true
