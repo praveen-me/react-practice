@@ -2,7 +2,6 @@ import React from 'react';
 
 function Header(props) {
   const {onSubmit, onChange, value, onClick} = props;
-  console.log(value);
   return (
     <header>
       <div className="logo-container center">
