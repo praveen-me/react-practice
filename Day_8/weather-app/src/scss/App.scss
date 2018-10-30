@@ -2,10 +2,15 @@
 @import './reset.scss';
 @import './base.scss';
 @import './Header.scss';
+@import './Main.scss';
 
 .App {
   font-family: 'Asap', sans-serif;
 }
 button, input {
   font-family: 'Asap', sans-serif;
+}
+
+.error-msg {
+  font-size: 1.2rem;
 }
