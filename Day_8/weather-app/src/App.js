@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './scss/App.scss';
 import Header from './components/Header';
 import Loader from './components/Loader';
-
+import Main from './components/Main';
+import {ErrorInternet, Errorvalue} from './components/Error'
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class App extends Component {
     this.state = {
       value : '',
       weatherData : null,
-      error : false
+      error : false,
+      errMsg : ''
     }
   }
 
@@ -36,28 +38,45 @@ class App extends Component {
       isLoading : true
     })
 
+    if(!navigator.onLine) {
+      return this.setState({
+        error : true,
+        errMsg : <ErrorInternet/>, 
+        isLoading:false
+      })
+    }
+
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=5437540a4b1f9a06516d43ed1ef3d5ee`)
       .then(res => res.json())
       .then(data => {
         if(data.cod === '404') {
          return this.setState({
             error : true,
+            errMsg : <Errorvalue/>,
             isLoading : false
           });
         }
         return this.setState({
           weatherData : data,
-          isLoading : false
+          isLoading : false,
+          error : false,
+          errMsg : ''
         });
       })
   }
 
   render() {
+    const {weatherData, error, isLoading, errMsg} = this.state;
     return (
       <div className="App">
         <Header onChange={this.handleChange} onSubmit={this.handleSubmit} value={this.state.value} onClick={this.handleClick}/>
         {
-          this.state.isLoading ? <Loader />  : ''
+          isLoading ? 
+          <Loader />  : error ? 
+          <p>{errMsg}</p>:
+          weatherData ? 
+          <Main data={weatherData}/> :
+          <p></p>
         }
       </div>
     );
