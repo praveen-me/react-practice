@@ -170,3 +170,39 @@ button {
   right: 0;
   transform: translateX(0);
 }
+
+.overlay-left {
+  left: 0;
+  transform: translateX(-20%);
+}
+
+// Animation
+
+// Move signin to right
+.container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+}
+
+// Move Overlay to Left
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+// Bring Signup over Signin
+.container.right-panel-active .sign-up-container {
+  z-index: 5;
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+// Move overlay back to right
+.container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+.container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
