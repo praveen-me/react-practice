@@ -1,4 +1,10 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebookF,
+  faGooglePlusG,
+  faLinkedinIn
+} from "@fortawesome/free-brands-svg-icons";
 
 const Form = ({ title, isSignUpForm, handleClick, children }) => {
   return (
@@ -6,13 +12,13 @@ const Form = ({ title, isSignUpForm, handleClick, children }) => {
       <h1>{title}</h1>
       <div className="social-container">
         <a href="#" className="social">
-          <i className="fab fa-facebook-f"></i>
+          <FontAwesomeIcon icon={faFacebookF} />
         </a>
         <a href="#" className="social">
-          <i className="fab fa-google-plus-g"></i>
+          <FontAwesomeIcon icon={faGooglePlusG} />
         </a>
         <a href="#" className="social">
-          <i className="fab fa-linkedin-in"></i>
+          <FontAwesomeIcon icon={faLinkedinIn} />
         </a>
       </div>
       <span>{children}</span>
