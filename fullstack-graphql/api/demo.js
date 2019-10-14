@@ -22,6 +22,9 @@ const resolvers = {
         friend: []
       };
     }
+  },
+  Mutation: {
+    addPet
   }
 };
 
