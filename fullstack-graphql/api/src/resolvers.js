@@ -5,8 +5,35 @@
 
 module.exports = {
   Query: {
-    pets(_, __, { models }) {
-      return models.Pet.findMany({});
+    pets(
+      _,
+      {
+        input: { name, type }
+      },
+      { models }
+    ) {
+      if (name) {
+        return models.Pet.findMany({ name });
+      } else if (type) {
+        return models.Pet.findMany({ type });
+      } else {
+        return models.Pet.findMany({ type, name });
+      }
+    },
+    pet(
+      _,
+      {
+        input: { name, type }
+      },
+      { models }
+    ) {
+      if (name) {
+        return models.Pet.findOne({ name });
+      } else if (type) {
+        return models.Pet.findOne({ type });
+      } else {
+        return models.Pet.findOne({ type, name });
+      }
     }
   }
   // Mutation: {},
