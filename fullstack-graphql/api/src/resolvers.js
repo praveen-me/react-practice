@@ -5,38 +5,18 @@
 
 module.exports = {
   Query: {
-    pets(
-      _,
-      {
-        input: { name, type }
-      },
-      { models }
-    ) {
-      if (name) {
-        return models.Pet.findMany({ name });
-      } else if (type) {
-        return models.Pet.findMany({ type });
-      } else {
-        return models.Pet.findMany({ type, name });
-      }
+    pets(_, { input }, { models }) {
+      return models.Pet.findMany(input);
     },
-    pet(
-      _,
-      {
-        input: { name, type }
-      },
-      { models }
-    ) {
-      if (name) {
-        return models.Pet.findOne({ name });
-      } else if (type) {
-        return models.Pet.findOne({ type });
-      } else {
-        return models.Pet.findOne({ type, name });
-      }
+    pet(_, { input }, { models }) {
+      return models.Pet.findOne(input);
+    }
+  },
+  Mutation: {
+    addPet(_, { input }, { models }) {
+      return models.Pet.create(input);
     }
   }
-  // Mutation: {},
   // Pet: {
   //   img(pet) {
   //     return pet.type === "DOG"

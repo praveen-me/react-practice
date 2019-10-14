@@ -15,6 +15,18 @@
       "createdAt": "6pm",
       "name": "Tommy",
       "type": "siber-husky"
+    },
+    {
+      "id": "y8X1860CwR1Tl7pLLpD3w",
+      "createdAt": 1571080560620,
+      "name": "Alpha",
+      "type": "durby"
+    },
+    {
+      "id": "KwVHpnZTlzNmGV2kDC37E",
+      "createdAt": 1571080610157,
+      "name": "Alpha2",
+      "type": "vodaphone"
     }
   ]
 }
