@@ -8,6 +8,8 @@ const typeDefs = gql`
     ADIDDAS
   }
 
+  union Footwear = Sneakers | Boot
+
   type User {
     email: String!
     password: String!
@@ -33,7 +35,7 @@ const typeDefs = gql`
 
   type Query {
     me: User!
-    shoes: [Shoe]!
+    shoes(input: ShowType): [Footwear]!
   }
 `;
 
@@ -46,14 +48,20 @@ const resolvers = {
         friend: []
       };
     },
-    shoes() {
+    shoes(_, { input }) {
       return [
         { brand: "JORDAN", size: 14, hasGrip: true },
         { brand: "NIKE", size: 12, sport: "Apple" }
-      ];
+      ].filter(val => val.brand === input);
     }
   },
   Shoe: {
+    __resolveType(shoe) {
+      if (shoe.hasOwnProperty("hasGrip")) return "Boot";
+      return "Sneakers";
+    }
+  },
+  Footwear: {
     __resolveType(shoe) {
       if (shoe.hasOwnProperty("hasGrip")) return "Boot";
       return "Sneakers";
