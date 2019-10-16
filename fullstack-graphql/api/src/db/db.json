@@ -8,25 +8,43 @@
       "id": "bdjghvs",
       "createdAt": "5pm",
       "name": "Tom",
-      "type": "husky"
+      "type": "DOG"
     },
     {
       "id": "12",
       "createdAt": "6pm",
       "name": "Tommy",
-      "type": "siber-husky"
+      "type": "CAT"
     },
     {
       "id": "y8X1860CwR1Tl7pLLpD3w",
       "createdAt": 1571080560620,
       "name": "Alpha",
-      "type": "durby"
+      "type": "CAT"
     },
     {
       "id": "KwVHpnZTlzNmGV2kDC37E",
       "createdAt": 1571080610157,
       "name": "Alpha2",
-      "type": "vodaphone"
+      "type": "CAT"
+    },
+    {
+      "id": "9WU113Zj_dqUDN-FM91mQ",
+      "createdAt": 1571237799954,
+      "name": "Batman",
+      "type": "CAT"
+    },
+    {
+      "id": "-KWHlnXnfyJj2DQTKt2Kp",
+      "createdAt": 1571238409842,
+      "name": "Superman",
+      "type": "DOG"
+    },
+    {
+      "id": "Zq0bJiXGHDRwz9csQ4rHw",
+      "createdAt": 1571246784766,
+      "name": "Thor",
+      "type": "DOG"
     }
   ]
 }
