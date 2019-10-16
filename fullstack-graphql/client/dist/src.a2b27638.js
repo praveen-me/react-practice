@@ -54359,6 +54359,17 @@ const query = _graphqlTag.default`
     }
   }
 `;
+const createPet = _graphqlTag.default`
+  mutation CreatePet($input: AddPetInput!) {
+    addPet(input: $input) {
+      name
+      id
+      user {
+        username
+      }
+    }
+  }
+`;
 
 function Pets() {
   const [modal, setModal] = (0, _react.useState)(false);
@@ -54367,10 +54378,39 @@ function Pets() {
     error,
     loading
   } = (0, _reactHooks.useQuery)(query);
+  const [addNewPet, {
+    d,
+    e,
+    l
+  }] = (0, _reactHooks.useMutation)(createPet, {
+    update(cache, {
+      data: {
+        addPet
+      }
+    }) {
+      const {
+        pets
+      } = cache.readQuery({
+        query
+      });
+      cache.writeQuery({
+        query,
+        data: {
+          pets: [...pets, addPet]
+        }
+      });
+    }
+
+  });
   if (loading) return _react.default.createElement(_Loader.default, null);
 
   const onSubmit = input => {
     setModal(false);
+    addNewPet({
+      variables: {
+        input
+      }
+    });
   };
 
   const petsList = data.pets.map(pet => _react.default.createElement("div", {
@@ -57486,7 +57526,8 @@ const link = new _apolloLinkHttp.HttpLink({
 const cache = new _apolloCacheInmemory.InMemoryCache();
 const client = new _apolloClient.ApolloClient({
   link,
-  cache
+  cache,
+  connectToDevTools: true
 });
 var _default = client;
 exports.default = _default;
