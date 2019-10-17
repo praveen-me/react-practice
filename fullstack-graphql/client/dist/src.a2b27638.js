@@ -54348,26 +54348,29 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+const petsFragment = _graphqlTag.default`
+  fragment PetFragment on Pet {
+    name
+    id
+    user {
+      username
+    }
+  }
+`;
 const query = _graphqlTag.default`
   query GetPets {
     pets {
-      name
-      id
-      user {
-        username
-      }
+    ...PetFragment
     }
   }
+  ${petsFragment}
 `;
 const createPet = _graphqlTag.default`
   mutation CreatePet($input: AddPetInput!) {
     addPet(input: $input) {
-      name
-      id
-      user {
-        username
-      }
-    }
+      ...PetFragment
+    } 
+    ${petsFragment}
   }
 `;
 
@@ -54408,7 +54411,19 @@ function Pets() {
     setModal(false);
     addNewPet({
       variables: {
-        input
+        input,
+        optimisticResponse: {
+          __typename: "Mutation",
+          pet: {
+            name: input.name,
+            id: "nbdgh",
+            __typename: "Pet",
+            user: {
+              username: "Apple",
+              __typename: "User"
+            }
+          }
+        }
       }
     });
   };
@@ -57665,7 +57680,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55310" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61628" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

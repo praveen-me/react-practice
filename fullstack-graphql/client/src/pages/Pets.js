@@ -5,27 +5,31 @@ import NewPet from "../components/NewPet";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import Loader from "../components/Loader";
 
+const petsFragment = gql`
+  fragment PetFragment on Pet {
+    name
+    id
+    user {
+      username
+    }
+  }
+`;
+
 const query = gql`
   query GetPets {
     pets {
-      name
-      id
-      user {
-        username
-      }
+    ...PetFragment
     }
   }
+  ${petsFragment}
 `;
 
 const createPet = gql`
   mutation CreatePet($input: AddPetInput!) {
     addPet(input: $input) {
-      name
-      id
-      user {
-        username
-      }
-    }
+      ...PetFragment
+    } 
+    ${petsFragment}
   }
 `;
 
@@ -55,7 +59,19 @@ export default function Pets() {
 
     addNewPet({
       variables: {
-        input
+        input,
+        optimisticResponse: {
+          __typename: "Mutation",
+          pet: {
+            name: input.name,
+            id: "nbdgh",
+            __typename: "Pet",
+            user: {
+              username: "Apple",
+              __typename: "User"
+            }
+          }
+        }
       }
     });
   };
