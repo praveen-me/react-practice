@@ -8,9 +8,9 @@ const NEW_POST = 'NEW_POST'
  */
 module.exports = {
   Query: {
-    me(_, __, {user}){
+    me: authenticated((_, __, {user}) =>{
       return user
-    },
+    }),
     posts(_, __, {user, models}) {
       return models.Post.findMany({author: user.id})
     },
@@ -42,9 +42,9 @@ module.exports = {
       return models.User.updateOne({id: user.id}, input)
     },
     // admin role
-    invite(_, {input}, {user}) {
-      return {from: user.id, role: input.role, createdAt: Date.now(), email: input.email}
-    },
+    invite: authorized("ADMIN", (_, {input}, {user}) => {
+      return {from: user, role: input.role, createdAt: Date.now(), email: input.email}
+    }),
 
     signup(_, {input}, {models, createToken}) {
       const existing = models.User.findOne({email: input.email})
