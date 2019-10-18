@@ -17,8 +17,42 @@
       "avatar": "http",
       "createdAt": 1571340513329,
       "id": "K0ORrxElBRv9V5lZDJJQt"
+    },
+    {
+      "email": "test3@gmail.com",
+      "password": "1234",
+      "role": "MEMBER",
+      "verified": false,
+      "avatar": "http",
+      "createdAt": 1571388793052,
+      "id": "tiz45EJr6kha_t5eJnAev"
     }
   ],
-  "posts": [],
+  "posts": [
+    {
+      "message": "Hello World",
+      "author": "K0ORrxElBRv9V5lZDJJQt",
+      "createdAt": 1571398700533,
+      "id": "Kz1_OnyaDuClc2HGvGbjP"
+    },
+    {
+      "message": "Hello World 2",
+      "author": "K0ORrxElBRv9V5lZDJJQt",
+      "createdAt": 1571398711917,
+      "id": "8tAJC2jhFLyMNMKTI07rW"
+    },
+    {
+      "message": "Hello World 3",
+      "author": "K0ORrxElBRv9V5lZDJJQt",
+      "createdAt": 1571398915378,
+      "id": "cniUqCBNBnICzHD8zZu1U"
+    },
+    {
+      "message": "Hello World 3",
+      "author": "K0ORrxElBRv9V5lZDJJQt",
+      "createdAt": 1571398996319,
+      "id": "HgzDur-ZvPsAVR75rDT6F"
+    }
+  ],
   "settings": []
 }
