@@ -4,7 +4,7 @@ const {
   UserInputError,
   ApolloError
 } = require("apollo-server");
-const typeDefs = require("./typedefs");
+const { typeDefs, FormatDate } = require("./typedefs");
 const resolvers = require("./resolvers");
 const { createToken, getUserFromToken } = require("./auth");
 const db = require("./db");
@@ -12,6 +12,9 @@ const db = require("./db");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  schemaDirectives: {
+    formatDate: FormatDate
+  },
   async context({ req, connection }) {
     if (connection) {
       return { ...db, ...connection.context };
