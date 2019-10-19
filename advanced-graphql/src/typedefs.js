@@ -1,134 +1,115 @@
-const { SchemaDirectiveVisitor } = require("apollo-server");
-const { defaultFieldResolver, GraphQLString } = require("graphql");
 const gql = require("graphql-tag");
-const { formatDate } = require("./utils");
 
-class FormatDate extends SchemaDirectiveVisitor {
-  visitFieldDefinition(field) {
-    const { resolve = defaultFieldResolver } = field;
-    const { defaultFormat } = this.args;
-    field.args.push({
-      type: GraphQLString,
-      name: "format"
-    });
+module.exports = gql`
+  directive @formatDate(
+    defaultFormat: String = "mm dd yyyy"
+  ) on FIELD_DEFINITION
 
-    field.resolve = async (source, { format, ...args }, context, info) => {
-      const date = await resolve.call(this, source, args, context, info);
+  directive @authenticated on FIELD_DEFINITION
 
-      return formatDate(date, format || defaultFormat);
-    };
+  directive @authorized(role: Role!) on FIELD_DEFINITION
+
+  enum Theme {
+    DARK
+    LIGHT
   }
-}
 
-module.exports = {
-  FormatDate,
-  typeDefs: gql`
-    directive @formatDate(
-      defaultFormat: String = "mm dd yyyy"
-    ) on FIELD_DEFINITION
+  enum Role {
+    ADMIN
+    MEMBER
+    GUEST
+  }
 
-    enum Theme {
-      DARK
-      LIGHT
-    }
+  type User {
+    id: ID!
+    email: String!
+    avatar: String!
+    verified: Boolean!
+    createdAt: String! @formatDate
+    posts: [Post]!
+    role: Role!
+    settings: Settings!
+  }
 
-    enum Role {
-      ADMIN
-      MEMBER
-      GUEST
-    }
+  type AuthUser {
+    token: String!
+    user: User!
+  }
 
-    type User {
-      id: ID!
-      email: String!
-      avatar: String!
-      verified: Boolean!
-      createdAt: String! @formatDate
-      posts: [Post]!
-      role: Role!
-      settings: Settings!
-    }
+  type Post {
+    id: ID!
+    message: String!
+    author: User!
+    createdAt: String!
+    likes: Int!
+    views: Int!
+  }
 
-    type AuthUser {
-      token: String!
-      user: User!
-    }
+  type Settings {
+    id: ID!
+    user: User!
+    theme: Theme!
+    emailNotifications: Boolean!
+    pushNotifications: Boolean!
+  }
 
-    type Post {
-      id: ID!
-      message: String!
-      author: User!
-      createdAt: String!
-      likes: Int!
-      views: Int!
-    }
+  type Invite {
+    email: String!
+    from: User!
+    createdAt: String!
+    role: Role!
+  }
 
-    type Settings {
-      id: ID!
-      user: User!
-      theme: Theme!
-      emailNotifications: Boolean!
-      pushNotifications: Boolean!
-    }
+  input NewPostInput {
+    message: String!
+  }
 
-    type Invite {
-      email: String!
-      from: User!
-      createdAt: String!
-      role: Role!
-    }
+  input UpdateSettingsInput {
+    theme: Theme
+    emailNotifications: Boolean
+    pushNotifications: Boolean
+  }
 
-    input NewPostInput {
-      message: String!
-    }
+  input UpdateUserInput {
+    email: String
+    avatar: String
+    verified: Boolean
+  }
 
-    input UpdateSettingsInput {
-      theme: Theme
-      emailNotifications: Boolean
-      pushNotifications: Boolean
-    }
+  input InviteInput {
+    email: String!
+    role: Role!
+  }
 
-    input UpdateUserInput {
-      email: String
-      avatar: String
-      verified: Boolean
-    }
+  input SignupInput {
+    email: String!
+    password: String!
+    role: Role!
+  }
 
-    input InviteInput {
-      email: String!
-      role: Role!
-    }
+  input SigninInput {
+    email: String!
+    password: String!
+  }
 
-    input SignupInput {
-      email: String!
-      password: String!
-      role: Role!
-    }
+  type Query {
+    me: User! @authenticated
+    posts: [Post]!
+    post(id: ID!): Post!
+    userSettings: Settings!
+    feed: [Post]!
+  }
 
-    input SigninInput {
-      email: String!
-      password: String!
-    }
+  type Mutation {
+    updateSettings(input: UpdateSettingsInput!): Settings!
+    createPost(input: NewPostInput!): Post!
+    updateMe(input: UpdateUserInput!): User
+    invite(input: InviteInput!): Invite! @authorized(role: ADMIN)
+    signup(input: SignupInput!): AuthUser!
+    signin(input: SigninInput!): AuthUser!
+  }
 
-    type Query {
-      me: User!
-      posts: [Post]!
-      post(id: ID!): Post!
-      userSettings: Settings!
-      feed: [Post]!
-    }
-
-    type Mutation {
-      updateSettings(input: UpdateSettingsInput!): Settings!
-      createPost(input: NewPostInput!): Post!
-      updateMe(input: UpdateUserInput!): User
-      invite(input: InviteInput!): Invite!
-      signup(input: SignupInput!): AuthUser!
-      signin(input: SigninInput!): AuthUser!
-    }
-
-    type Subscription {
-      newPost: Post!
-    }
-  `
-};
+  type Subscription {
+    newPost: Post!
+  }
+`;

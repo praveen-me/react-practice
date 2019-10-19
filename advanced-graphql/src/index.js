@@ -1,19 +1,21 @@
-const {
-  ApolloServer,
-  AuthenticationError,
-  UserInputError,
-  ApolloError
-} = require("apollo-server");
-const { typeDefs, FormatDate } = require("./typedefs");
+const { ApolloServer } = require("apollo-server");
+const typeDefs = require("./typedefs");
 const resolvers = require("./resolvers");
 const { createToken, getUserFromToken } = require("./auth");
 const db = require("./db");
+const {
+  FormatDateDirective,
+  AuthorizationDirective,
+  AuthenticationDirective
+} = require("./directives");
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   schemaDirectives: {
-    formatDate: FormatDate
+    formatDate: FormatDateDirective,
+    authenticated: AuthenticationDirective,
+    authorized: AuthorizationDirective
   },
   async context({ req, connection }) {
     if (connection) {
