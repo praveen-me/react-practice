@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap');
+
+$font: 'Lato', sans-serif;
+$bold: 700;
+$light: 300;
+$size-medium: 24px;
+$size-normal: 16px;
+$size-small-v2: 14px;
+$size-small-v1: 12px;
+$light-bg-v1: #f9fafc;
+$light-bg-v2: #eeeff1;
+$light-color-v1: #afb2b6;
+$light-color-v2: #81878c;
+$dark-color-v1: #2f363f;
+$dark-color-v2: #535b62;
+$active-folder-color: #e6f5ff;
+$high-light-color: #4ab7ff;
+$padding-normal: 16px;
+$margin-normal: 16px;
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: $font;
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/images/bg.jpg);
+	background-position: center;
+}
+
+.main {
+	justify-content: center;
+}
+
+.post-card {
+	background: #fff;
+}
+
+@import './header';
