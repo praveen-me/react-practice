@@ -18,7 +18,7 @@ const Postcard = ({ title, excerpt, featuredImage, tags, isAmp }) => {
 					<span
 						key={node}
 						className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 m-3'>
-						#{node.name.toLowerCase()}
+						{`#${node.name.toLowerCase()}`}
 					</span>
 				))}
 			</div>
