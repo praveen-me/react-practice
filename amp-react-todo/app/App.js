@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Postcard from "./PostCard";
@@ -28,7 +28,6 @@ const App = () => {
 
   const posts = data?.posts?.nodes;
 
-  console.log(posts);
   return (
     <main className="main flex flex-wrap text-center my-8 mx-0">
       {posts && posts.map(post => <Postcard {...post} isAmp={true} />)}
