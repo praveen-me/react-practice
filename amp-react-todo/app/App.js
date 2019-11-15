@@ -1,36 +1,29 @@
-import React from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-import Postcard from "./PostCard";
-
-const query = gql`
-  query {
-    posts {
-      nodes {
-        id
-        title
-        excerpt
-        featuredImage {
-          sourceUrl
-        }
-        tags {
-          nodes {
-            name
-          }
-        }
-      }
-    }
-  }
-`;
+import {h} from 'preact';
+import {useState} from 'preact/compat';
 
 const App = () => {
-  const { error, loading, data } = useQuery(query);
+  const [todo, setTodo] = useState('')
+  const [todos, setTodos] = useState([]);
 
-  const posts = data?.posts?.nodes;
+  const handleTodoChange = ({target: {value}}) => {
+    
+    setTodo(value);
+  } 
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setTodos([...todos, todo]);
+  }
 
   return (
     <main className="main flex flex-wrap text-center my-8 mx-0">
-      {posts && posts.map(post => <Postcard {...post} isAmp={true} />)}
+      <input type="text" onChange={handleTodoChange}/>
+      <button type="submit" onClick={handleSubmit}>Add Todo</button>
+      {
+        todos && todos.map(todo => (
+        <p key={todo}>{todo}</p>
+        ))
+      }
     </main>
   );
 };
