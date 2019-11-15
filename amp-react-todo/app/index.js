@@ -1,17 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import {h, render} from 'preact'
 import App from "./App";
-import { ApolloProvider } from "@apollo/react-hooks";
-import client from "./config";
 
 const btn = document.getElementById("btn");
 const root = document.getElementById("root");
 
 btn.addEventListener("click", () => {
-  ReactDOM.render(
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>,
+  render(
+    <App />,
     root
   );
   btn.style.display = "none";
