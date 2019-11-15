@@ -14,6 +14,14 @@ const App = () => {
 		setTodos([...todos, todo]);
 	};
 
+	const handleDelete = (index) => {
+		const todosCopy = [...todos];
+
+		todosCopy.splice(index, 1);
+
+		setTodos(todosCopy);
+	};
+
 	return (
 		<main className='main text-center my-8 mx-0'>
 			<div class='w-full max-w-xs bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto my-0'>
@@ -37,8 +45,11 @@ const App = () => {
 			<div className='todo-wrapper p-4'>
 				{todos &&
 					todos.map((todo, index) => (
-						<div class='w-full rounded bg-orange-200 bg-gray-500 text-black my-4 py-2 text-left px-4'>
-							{`${index + 1} - ${todo}`}
+						<div class='flex justify-between w-full rounded bg-orange-200 bg-gray-500 text-black my-4 py-2 text-left px-4'>
+							<span>{`${index + 1} - ${todo}`}</span>
+							<button class='delete' onClick={() => handleDelete(index)}>
+								x
+							</button>
 						</div>
 					))}
 			</div>
