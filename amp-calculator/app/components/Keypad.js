@@ -1,16 +1,19 @@
 import { h } from 'preact';
+import { keys, operations } from './../utils';
 
-const keys = ['7', '8', '9', '÷', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'];
-
-const operations = ['÷', '*', '-', '.', '=', '+'];
-
-const Keypad = () => {
+const Keypad = ({ setExpression, handleResult }) => {
 	return (
 		<div className='keypad'>
 			<button className='keypad_top_btn btn'>AC</button>
 			<div className='keypad_btn_wrapper'>
 				{keys.map(key => (
-					<button class='btn keypad_'></button>
+					<button
+						key={key}
+						id={key}
+						className={`btn ${operations.includes(key) ? 'keypad_operation' : 'keypad_numeric'}`}
+						onClick={key === '=' ? handleResult : setExpression}>
+						{key}
+					</button>
 				))}
 			</div>
 		</div>
