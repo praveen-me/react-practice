@@ -1,90 +1,97 @@
-import { h } from 'preact';
-import { useState } from 'preact/compat';
-import Screen from './components/Screen/index';
-import Keypad from './components/Keypad';
-import { operations } from './utils';
+import { h } from "preact";
+import { useState } from "preact/compat";
+import Screen from "./components/Screen/index";
+import Keypad from "./components/Keypad";
+import { operations } from "./utils";
 
 const App = () => {
-	const [expression, setExpression] = useState([]);
-	const [result, setResult] = useState('0');
+  const [expression, setExpression] = useState([]);
+  const [result, setResult] = useState("0");
 
-	const handleExpression = event => {
-		const value = event.target.id;
-		let newExpression = [...expression];
+  const handleExpression = event => {
+    const value = event.target.id;
+    let newExpression = [...expression];
 
-		if (operations.includes(value)) {
-			newExpression.push(value);
-		} else {
-			let lastValue = newExpression[newExpression.length - 1];
+    if (operations.includes(value)) {
+      newExpression.push(value);
+    } else {
+      let lastValue = newExpression[newExpression.length - 1];
 
-			if (newExpression.length) {
-				if (operations.includes(lastValue)) {
-					newExpression.push(value);
-				} else {
-					let getLastValue = lastValue + value;
-					newExpression.splice(-1, 1, getLastValue);
-				}
-			} else {
-				newExpression.push(value);
-			}
-		}
-		setExpression(newExpression);
-	};
+      if (newExpression.length) {
+        if (operations.includes(lastValue)) {
+          newExpression.push(value);
+        } else {
+          let getLastValue = lastValue + value;
+          newExpression.splice(-1, 1, getLastValue);
+        }
+      } else {
+        newExpression.push(value);
+      }
+    }
+    setExpression(newExpression);
+  };
 
-	console.log(expression);
+  const handleReset = () => {
+    setExpression([]);
+    setResult("0");
+  };
 
-	const handleResult = () => {
-		let result = expression[0];
-		let lastExpression;
+  const handleResult = () => {
+    let result = expression[0];
+    let lastExpression;
 
-		for (let i = 1; i < expression.length; i++) {
-			let value = expression[i];
+    for (let i = 1; i < expression.length; i++) {
+      let value = expression[i];
 
-			if (operations.includes(value)) {
-				lastExpression = value;
-			} else {
-				switch (lastExpression) {
-					case '+':
-						{
-							result = Number(result) + Number(value);
-						}
-						break;
+      if (operations.includes(value)) {
+        lastExpression = value;
+      } else {
+        switch (lastExpression) {
+          case "+":
+            {
+              result = Number(result) + Number(value);
+            }
+            break;
 
-					case '-':
-						{
-							result = Number(result) - Number(value);
-						}
-						break;
+          case "-":
+            {
+              result = Number(result) - Number(value);
+            }
+            break;
 
-					case '*':
-						{
-							result = Number(result) * Number(value);
-						}
-						break;
+          case "*":
+            {
+              result = Number(result) * Number(value);
+            }
+            break;
 
-					case '÷':
-						{
-							result = Number(result) / Number(value);
-						}
-						break;
+          case "÷":
+            {
+              result = Number(result) / Number(value);
+            }
+            break;
 
-					default:
-						console.log('This should never print');
-				}
-			}
-		}
+          default:
+            console.log("This should never print");
+        }
+      }
+    }
 
-		setResult(result);
-	};
+    setResult(result.toFixed(2));
+  };
 
-	return (
-		<main className='calculator'>
-			<div className='wrapper'>
-				<Screen expression={expression.join(' ')} result={result} />
-				<Keypad setExpression={handleExpression} handleResult={handleResult} />
-			</div>
-		</main>
-	);
+  return (
+    <main className="calculator">
+      <div className="wrapper">
+        <Screen expression={expression.join(" ")} result={result} />
+        <Keypad
+          setExpression={handleExpression}
+          handleResult={handleResult}
+          handleReset={handleReset}
+        />
+      </div>
+    </main>
+  );
 };
 
 export default App;
