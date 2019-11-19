@@ -1,10 +1,12 @@
 import { h } from 'preact';
 import { keys, operations } from './../utils';
 
-const Keypad = ({ setExpression, handleResult }) => {
+const Keypad = ({ setExpression, handleResult, handleReset }) => {
 	return (
 		<div className='keypad'>
-			<button className='keypad_top_btn btn'>AC</button>
+			<button className='keypad_top_btn btn' onClick={handleReset}>
+				AC
+			</button>
 			<div className='keypad_btn_wrapper'>
 				{keys.map(key => (
 					<button
