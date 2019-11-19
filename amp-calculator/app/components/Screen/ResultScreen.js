@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
-const ResultScreen = () => {
-	return <div class='screen_display answer'> 30</div>;
+const ResultScreen = ({ result }) => {
+	return <div class='screen_display answer'>{result}</div>;
 };
 
 export default ResultScreen;
