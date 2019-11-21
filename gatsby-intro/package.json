@@ -18,7 +18,10 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
     "cross-env": "^5.2.0",
+    "gatsby-plugin-emotion": "^4.1.15",
     "prettier": "^1.18.2"
   },
   "repository": {
