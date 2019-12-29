@@ -7,8 +7,6 @@ const DisplayProfile = () => {
   const userData = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  console.log(userData, "in componenet");
-
   useEffect(() => {
     dispatch({
       type: "GET_USER_DATA",
