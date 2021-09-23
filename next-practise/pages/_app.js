@@ -3,7 +3,12 @@ import reduxWrapper from "../utils/reduxWrapper";
 
 function MyApp(props) {
   const { Component, pageProps } = props;
-  return <Component {...pageProps} />;
+  console.log({ pageProps });
+  return <Component {...props} {...pageProps} />;
 }
+
+MyApp.getInitialProps = () => {
+  return { testProp: "A props" };
+};
 
 export default reduxWrapper.wrapper(MyApp);

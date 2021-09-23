@@ -13,16 +13,18 @@ function rootReducer(state = initialState, action) {
       return state;
   }
 }
+const getIsServer = () => typeof window == "undefined";
 
-const initializeStore = (preloadedState = {}) =>
-  createStore(rootReducer, preloadedState);
+const initializeStore = (preloadedState = {}) => createStore(rootReducer);
 
 function wrapper(Component) {
-  // function WithRedux(appProps) {
-  //   const store = useRef(initializeStore());
-  //   return (
-  //   );
-  // }
+  const displayName = `withRedux(${
+    Component.displayName || Component.name || "Component"
+  })`;
+
+  const hasInitialProps = "getInitialProps" in Component;
+
+  console.log({ displayName, hasInitialProps });
 
   class WithRedux extends App {
     constructor(props) {
@@ -30,7 +32,25 @@ function wrapper(Component) {
       this.reduxStore = initializeStore();
     }
 
+    static getInitialProps(ctx) {
+      console.log(ctx);
+
+      return {};
+    }
+
     render() {
+      console.log(this.props);
+
+      const { initialState, initialProps, ...props } = this.props;
+
+      console.log({ initialProps, initialState });
+
+      let finalProps = {};
+
+      finalProps.pageProps = {
+        initialState: this.reduxStore.getState(),
+      };
+
       return (
         <Provider store={this.reduxStore}>
           <Component {...this.props} />;
