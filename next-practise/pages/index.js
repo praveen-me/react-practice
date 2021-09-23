@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styles from "../styles/Home.module.css";
 
 export default function Home(props) {
-  const count = useSelector((state) => state.counter);
+  const count = useSelector((state) => state.count);
 
   console.log({ count });
 
